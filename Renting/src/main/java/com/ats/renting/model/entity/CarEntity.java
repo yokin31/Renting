@@ -4,27 +4,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "car")
+@Table(name = "cars")
 public class CarEntity {
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private Integer id;
 		private String brand;
-		private String model;	
+		private String model;
+		@ManyToOne
+		private UserEntity user;
 		
 		public CarEntity() {
 		}
 
-		public CarEntity(Integer id, String model, String brand) {
+
+		public CarEntity(Integer id, String brand, String model, UserEntity user) {
+			super();
 			this.id = id;
-			this.model = model;
 			this.brand = brand;
+			this.model = model;
+			this.user = user;
 		}
+
 
 		public Integer getId() {
 			return id;
@@ -50,6 +57,17 @@ public class CarEntity {
 			this.brand = brand;
 		}
 
+
+		public UserEntity getUser() {
+			return user;
+		}
+
+
+		public void setUser(UserEntity user) {
+			this.user = user;
+		}
+
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -57,8 +75,10 @@ public class CarEntity {
 			result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 			result = prime * result + ((id == null) ? 0 : id.hashCode());
 			result = prime * result + ((model == null) ? 0 : model.hashCode());
+			result = prime * result + ((user == null) ? 0 : user.hashCode());
 			return result;
 		}
+
 
 		@Override
 		public boolean equals(Object obj) {
@@ -84,15 +104,20 @@ public class CarEntity {
 					return false;
 			} else if (!model.equals(other.model))
 				return false;
+			if (user == null) {
+				if (other.user != null)
+					return false;
+			} else if (!user.equals(other.user))
+				return false;
 			return true;
 		}
 
+
 		@Override
 		public String toString() {
-			return "Car [id=" + id + ", model=" + model + ", brand=" + brand + "]";
+			return "CarEntity [id=" + id + ", brand=" + brand + ", model=" + model + ", user=" + user + "]";
 		}
-		
-		
+
 		
 		
 	

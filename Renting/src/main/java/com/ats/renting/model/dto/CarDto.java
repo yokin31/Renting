@@ -1,20 +1,28 @@
 package com.ats.renting.model.dto;
 
+import com.ats.renting.model.entity.UserEntity;
 
 public class CarDto {
 
 		private Integer id;
 		private String brand;
-		private String model;	
+		private String model;
+		private UserEntity user;
 		
 		public CarDto() {
 		}
 
-		public CarDto(Integer id, String model, String brand) {
+		
+
+		public CarDto(Integer id, String brand, String model, UserEntity user) {
+			super();
 			this.id = id;
-			this.model = model;
 			this.brand = brand;
+			this.model = model;
+			this.user = user;
 		}
+
+
 
 		public Integer getId() {
 			return id;
@@ -39,6 +47,19 @@ public class CarDto {
 		public void setBrand(String brand) {
 			this.brand = brand;
 		}
+		
+
+		public UserEntity getUser() {
+			return user;
+		}
+
+
+
+		public void setUser(UserEntity user) {
+			this.user = user;
+		}
+
+
 
 		@Override
 		public int hashCode() {
@@ -47,8 +68,11 @@ public class CarDto {
 			result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 			result = prime * result + ((id == null) ? 0 : id.hashCode());
 			result = prime * result + ((model == null) ? 0 : model.hashCode());
+			result = prime * result + ((user == null) ? 0 : user.hashCode());
 			return result;
 		}
+
+
 
 		@Override
 		public boolean equals(Object obj) {
@@ -74,13 +98,21 @@ public class CarDto {
 					return false;
 			} else if (!model.equals(other.model))
 				return false;
+			if (user == null) {
+				if (other.user != null)
+					return false;
+			} else if (!user.equals(other.user))
+				return false;
 			return true;
 		}
 
 		@Override
 		public String toString() {
-			return "Car [id=" + id + ", model=" + model + ", brand=" + brand + "]";
+			return "CarDto [id=" + id + ", brand=" + brand + ", model=" + model + ", user=" + user + "]";
 		}
+
+        
+        
 		
 		
 		

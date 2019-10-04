@@ -1,29 +1,47 @@
 package com.ats.renting.model.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "users")
 public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@Column(unique = true)
 	private String name;
-	@OneToMany(fetch = FetchType.EAGER)
-	private CarEntity car;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy ="user")
+	private List<CarEntity> car;
 	
 	public UserEntity() {
 	}
 
-	public UserEntity(Integer id, String name, CarEntity car) {
+
+	public UserEntity(Integer id, String name, List<CarEntity> car) {
 		this.id = id;
 		this.name = name;
 		this.car = car;
 	}
+
+	public List<CarEntity> getCar() {
+		return car;
+	}
+
+
+	public void setCar(List<CarEntity> car) {
+		this.car = car;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -41,13 +59,7 @@ public class UserEntity {
 		this.name = name;
 	}
 
-	public CarEntity getCar() {
-		return car;
-	}
-
-	public void setCar(CarEntity car) {
-		this.car = car;
-	}
+	
 
 	@Override
 	public int hashCode() {

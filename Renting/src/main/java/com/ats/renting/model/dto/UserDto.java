@@ -1,5 +1,7 @@
 package com.ats.renting.model.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,8 +14,7 @@ import javax.persistence.Table;
 import com.ats.renting.model.entity.CarEntity;
 
 
-@Entity
-@Table(name = "user")
+
 public class UserDto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,12 +22,12 @@ public class UserDto {
 	@Column(unique = true)
 	private String name;
 	@OneToMany(fetch = FetchType.EAGER)
-	private CarEntity car;
+	private List<CarEntity> car;
 	
 	public UserDto() {
 	}
 
-	public UserDto(Integer id, String name, CarEntity car) {
+	public UserDto(Integer id, String name, List<CarEntity> car) {
 		this.id = id;
 		this.name = name;
 		this.car = car;
@@ -48,11 +49,11 @@ public class UserDto {
 		this.name = name;
 	}
 
-	public CarEntity getCar() {
+	public List<CarEntity> getCar() {
 		return car;
 	}
 
-	public void setCar(CarEntity car) {
+	public void setCar(List<CarEntity> car) {
 		this.car = car;
 	}
 

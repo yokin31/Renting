@@ -15,7 +15,7 @@ public class MapperServiceCarDto implements IMapeadorCarDto<CarEntity, CarDto>{
 	 
 	@Override
 	public CarDto MapperServiceCarDto(CarEntity car) {
-		return new CarDto(car.getId(), car.getModel(), car.getBrand());
+		return new CarDto(car.getId(), car.getModel(), car.getBrand(),car.getUser());
 
 	}
 
